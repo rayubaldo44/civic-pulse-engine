@@ -74,7 +74,7 @@ pnpm lint
 pnpm build
 ```
 
-For a separate Vercel showcase project, configure `DEMO_ONLY=true`, `PUBLIC_SUPABASE_URL=https://example.supabase.co`, `PUBLIC_SUPABASE_ANON_KEY=demo-placeholder`, `SUPABASE_URL=https://example.supabase.co`, and `SUPABASE_SERVICE_ROLE_KEY=demo-placeholder` (the latter two are unused staff-module placeholders). Supply no production database or integration credentials. Deploy with `vercel deploy --local-config vercel.demo.json --prod`; the demo config omits the staff application's scheduled job. Verify `/demo`, static assets, the root redirect, and staff/API 404 responses after deployment.
+For a separate Vercel showcase project, configure `DEMO_ONLY=true`, `PUBLIC_SUPABASE_URL=https://example.supabase.co`, `PUBLIC_SUPABASE_ANON_KEY=demo-placeholder`, `SUPABASE_URL=https://example.supabase.co`, and `SUPABASE_SERVICE_ROLE_KEY=demo-placeholder` (the latter two are unused staff-module placeholders). Supply no production database or integration credentials. In a disposable checkout dedicated to the showcase deployment, copy `vercel.demo.json` over `vercel.json`, then run `vercel deploy --prod`. Remote builds must see the demo configuration at the root filename; selecting an alternate local config alone can retain the staff cron. The demo config explicitly sets an empty cron list. Verify `/demo`, static assets, the root redirect, and staff/API 404 responses after deployment.
 
 ## Staff application and limitations
 
