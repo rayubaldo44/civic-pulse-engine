@@ -1,0 +1,29 @@
+<View>
+  <!-- Flagged claim verification template. Paste into the project's Labeling Setup. -->
+  <View style="box-shadow: 2px 2px 6px #ccc; padding: 1em; border-radius: 8px;">
+    <Header value="Claim to verify" />
+    <Text name="claim" value="$claim_text" />
+    <View style="color: #888; font-size: 12px; margin-top: 0.5em;">
+      <Text name="claim_id" value="claim_id: $id" />
+    </View>
+
+    <Header value="Retrieved evidence (from LGU documents)" />
+    <View style="border-left: 3px solid #ffe08a; padding-left: 1em; color: #555;">
+      <Text name="evidence" value="$rag_evidence_snippet" />
+    </View>
+
+    <Header value="RAG determination (context only)" />
+    <Text name="rag_dim" value="RAG said: $rag_determination" />
+
+    <Header value="Your verification" />
+    <Choices name="decision" toName="claim" choice="single" required="true"
+             showInLine="false">
+      <Choice value="Verified True" />
+      <Choice value="Verified False" />
+      <Choice value="Inconclusive" />
+    </Choices>
+
+    <Header value="Notes (optional)" />
+    <TextArea name="notes" toName="claim" rows="3" placeholder="Optional note for the audit trail..." />
+  </View>
+</View>

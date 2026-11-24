@@ -1,0 +1,31 @@
+{
+	"schema": "civic-pulse-claim-evidence-v1",
+	"purpose": "Invented examples for demonstrating retrieval evaluation. No citizen comments or deployed corpus are included. Create matching synthetic reference documents in your own isolated test project before evaluating; these examples do not establish retrieval quality.",
+	"pairs": [
+		{
+			"id": "SYNTHETIC-01",
+			"claim": "The fictional North District library opens at nine.",
+			"expected_document_type": "Advisory",
+			"expected_title": ["Synthetic library opening hours"],
+			"section_signature": ["opens at 09:00"],
+			"note": "Invented claim and expected document; create the synthetic document before evaluating."
+		},
+		{
+			"id": "SYNTHETIC-02",
+			"claim": "The fictional South District collection runs every Friday.",
+			"expected_document_type": "Waste Management Plan",
+			"expected_title": ["Synthetic collection schedule"],
+			"section_signature": ["every Friday"],
+			"note": "Invented claim and expected document; create the synthetic document before evaluating."
+		},
+		{
+			"id": "SYNTHETIC-03",
+			"claim": "The fictional East District pool is free on Sundays.",
+			"expected_document_type": "Advisory",
+			"expected_title": ["Synthetic pool access"],
+			"section_signature": ["free on Sundays"],
+			"evidence_in_corpus": false,
+			"note": "Intentionally absent evidence example."
+		}
+	]
+}

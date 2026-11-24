@@ -1,0 +1,12 @@
+overrides:
+  cookie@<0.7.0: '>=0.7.0'
+  uuid@<11.1.1: '>=11.1.1'
+
+allowBuilds:
+  esbuild: true
+
+# Not applicable while experimental remote functions are disabled.
+# Guarded by scripts/check-audit-exceptions.mjs; review by 2027-02-24.
+auditConfig:
+  ignoreGhsas:
+    - GHSA-3r8g-jcqq-3p5j

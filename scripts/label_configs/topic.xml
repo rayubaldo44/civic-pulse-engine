@@ -1,0 +1,23 @@
+<View>
+  <!-- Topic annotation template. Paste into the project's Labeling Setup. -->
+  <View style="box-shadow: 2px 2px 6px #ccc; padding: 1em; border-radius: 8px;">
+    <Header value="Civic Comment" />
+    <Text name="comment" value="$cleaned_text" />
+    <View style="color: #888; font-size: 12px; margin-top: 0.5em;">
+      <Text name="comment_id" value="comment_id: $comment_id" />
+    </View>
+
+    <Header value="Topic" />
+    <Choices name="topic" toName="comment" choice="single" required="true"
+             showInLine="false">
+      <Choice value="Infrastructure" />
+      <Choice value="Healthcare" />
+      <Choice value="Waste Management" />
+      <Choice value="Public Safety" />
+      <Choice value="Other" />
+    </Choices>
+
+    <Header value="Current NLP label (context only)" />
+    <Text name="current_label" value="Current: $topic_label" />
+  </View>
+</View>

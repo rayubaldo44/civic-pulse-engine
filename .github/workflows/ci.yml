@@ -1,0 +1,48 @@
+name: Verify public source
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 4 * * 1'
+
+permissions:
+  contents: read
+
+jobs:
+  secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_ENABLE_COMMENTS: 'false'
+          GITLEAKS_ENABLE_UPLOAD_ARTIFACT: 'false'
+
+  verify:
+    runs-on: ubuntu-latest
+    env:
+      PUBLIC_SUPABASE_URL: https://example.supabase.co
+      PUBLIC_SUPABASE_ANON_KEY: demo-placeholder
+      SUPABASE_URL: https://example.supabase.co
+      SUPABASE_SERVICE_ROLE_KEY: demo-placeholder
+    steps:
+      - uses: actions/checkout@v6
+      - uses: pnpm/action-setup@v6
+        with:
+          version: 12.4.2
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm vitest run
+      - run: pnpm check
+      - run: pnpm lint
+      - run: pnpm build
+      - run: node scripts/check-audit-exceptions.mjs
+      - run: pnpm audit --audit-level high

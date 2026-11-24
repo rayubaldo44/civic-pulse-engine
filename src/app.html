@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link
+			rel="preload"
+			href="/fonts/ijwRs572Xtc6ZYQws9YVwnNGfJ4.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin
+		/>
+		%sveltekit.head%
+	</head>
+	<body class="dot-pattern" data-sveltekit-preload-data="hover">
+		<div style="display: contents">%sveltekit.body%</div>
+	</body>
+	<script>
+		// Apply dark mode before first paint to prevent FOUC.
+		// On the landing page we always follow the OS theme (its own effect
+		// overrides any persisted dashboard toggle); everywhere else a saved
+		// preference wins, with the system preference as the default.
+		(function () {
+			try {
+				var stored = localStorage.getItem('civic-pulse-theme');
+				var systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+				var dark =
+					location.pathname === '/'
+						? systemDark
+						: stored === 'dark' || (stored !== 'light' && systemDark);
+				if (dark) document.documentElement.classList.add('dark');
+			} catch (_) {}
+		})();
+		// Supabase-hosted auth failures (expired/reused email links) arrive as
+		// URL fragments (#error=...), which never reach the server. Normalize
+		// them to the login page's error banner before hydration.
+		(function () {
+			if (!location.hash || location.hash.indexOf('error=') === -1) return;
+			location.replace('/login?error=invalid_invite_link');
+		})();
+	</script>
+</html>
